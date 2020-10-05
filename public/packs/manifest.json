@@ -1,13 +1,13 @@
 {
-  "application.js": "/packs/js/application-2851046c2e519222621c.js",
-  "application.js.map": "/packs/js/application-2851046c2e519222621c.js.map",
+  "application.js": "/packs/js/application-3bf9b125e2eaee5140a7.js",
+  "application.js.map": "/packs/js/application-3bf9b125e2eaee5140a7.js.map",
   "entrypoints": {
     "application": {
       "js": [
-        "/packs/js/application-2851046c2e519222621c.js"
+        "/packs/js/application-3bf9b125e2eaee5140a7.js"
       ],
       "js.map": [
-        "/packs/js/application-2851046c2e519222621c.js.map"
+        "/packs/js/application-3bf9b125e2eaee5140a7.js.map"
       ]
     }
   }
