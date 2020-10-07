@@ -1,12 +1,11 @@
 import React from 'react';
+import ListListingContainer from '../list/ListListingContainer';
 
 class Board extends React.Component {
-  componentDidMount = () => {
-    console.log(this.props.onFetchBoard());
-  };
-
   render() {
-    return <p>hello</p>;
+    return (
+      <ListListingContainer board={this.props.board} />
+    );
   }
 }
 

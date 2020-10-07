@@ -1,31 +1,38 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import Board from './Board';
+import React from "react";
+import { connect } from "react-redux";
+import Board from "./Board";
+import { fetchBoard } from "../../actions/BoardActions";
 
-// const boardId = useParams().id;
-
-const mapStateToProps = (state) => {
-  const boardId = useParams().id;
+const mapStateToProps = (state, props) => {
+  const id = props.match.params.id;
   return {
     board: state.boards.find((board) => {
-      board.id === boardId;
+      return +board.id === +id;
     }),
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  const boardId = useParams().id;
+const mapDispatchToProps = (dispatch, props) => {
+  const id = props.match.params.id;
   return {
     onFetchBoard: () => {
-      fetch(`/api/boards/${boardId}`).then((board) => {
+      fetch(`/api/boards/${id}`).then((board) => {
         board.json().then((brd) => {
-          console.log(brd);
-          dispatch({ type: 'BOARD_FETCHED', payload: { board: brd } });
+          dispatch(fetchBoard(brd));
         });
       });
     },
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Board);
+class BoardContainer extends React.Component {
+  componentDidMount = () => {
+    this.props.onFetchBoard();
+  };
+
+  render() {
+    return this.props.board ? <Board board={this.props.board} /> : null;
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(BoardContainer);
