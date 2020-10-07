@@ -23,6 +23,7 @@ list2.save
 
 card1 = Card.new({title: "Card 1"})
 card1.list = list1
+card1.description = "Card 1 description"
 card1.save
 card2 = Card.new({title: "Card 2"})
 card2.list = list1
