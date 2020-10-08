@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import List from "./List";
+import ListContainer from "./ListContainer";
 import AddList from "./AddList";
 
 const mapStateToProps = (state, props) => {
@@ -30,7 +30,9 @@ class ListListingContainer extends React.Component {
         <main>
           <div id="list-container" className="list-container">
             <div id="existing-lists" className="existing-lists">
-              { this.props.lists.map((list) => <List key={list.id} list={list} />) }
+              {this.props.lists.map((list) => (
+                <ListContainer key={list.id} list={list} />
+              ))}
             </div>
             <AddList />
           </div>
