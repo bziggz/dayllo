@@ -30,10 +30,10 @@ class Api::ListsController < ApplicationController
   private
 
   def new_list_params
-    params.require(:list).permit(:title)
+    params.require(:list).permit(:title, :board_id)
   end
 
   def update_list_params
-        params.require(:list).permit(:title, :board_id)
+    params.require(:list).permit(:title)
   end
 end
