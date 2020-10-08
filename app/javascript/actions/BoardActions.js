@@ -36,3 +36,9 @@ export function createBoard(board, callback) {
     });
   };
 }
+
+export function fetchBoard(board) {
+  return {
+    type: types.FETCH_BOARD_SUCCESS, payload: { board },
+  };
+};
