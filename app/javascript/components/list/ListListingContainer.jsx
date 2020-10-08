@@ -2,11 +2,35 @@ import React from "react";
 import { connect } from "react-redux";
 import ListContainer from "./ListContainer";
 import AddList from "./AddList";
+import * as actions from "../../actions/ListActions";
 
 const mapStateToProps = (state, props) => {
   const boardId = props.board.id;
   return {
     lists: state.lists.filter((list) => list.board_id === boardId),
+  };
+};
+
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    onAddList: (title) => {
+      const boardId = props.board.id;
+
+      const fetchObj = {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          title,
+          board_id: boardId,
+        }),
+      };
+
+      fetch("/api/lists", fetchObj).then((list) => {
+        list.json().then((l) => {
+          dispatch(actions.createList(l));
+        });
+      });
+    },
   };
 };
 
@@ -34,7 +58,7 @@ class ListListingContainer extends React.Component {
                 <ListContainer key={list.id} list={list} />
               ))}
             </div>
-            <AddList />
+            <AddList onAddList={this.props.onAddList} />
           </div>
         </main>
       </div>
@@ -42,4 +66,7 @@ class ListListingContainer extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, null)(ListListingContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ListListingContainer);

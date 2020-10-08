@@ -1,6 +1,6 @@
 class Api::ListsController < ApplicationController
   def create
-    @list = List.new(list_params, board_id: params[:id])
+    @list = List.new(new_list_params)
 
     if @list.save
       render :create, status: :created
@@ -16,7 +16,7 @@ class Api::ListsController < ApplicationController
   def update
     @list = List.find(params[:id])
 
-    if @list.update(list_params)
+    if @list.update(update_list_params)
       render :update, status: :created
     else
       @error = @list.errors.full_messages.join(', ')
@@ -29,7 +29,11 @@ class Api::ListsController < ApplicationController
 
   private
 
-  def list_params
+  def new_list_params
     params.require(:list).permit(:title)
+  end
+
+  def update_list_params
+        params.require(:list).permit(:title, :board_id)
   end
 end
