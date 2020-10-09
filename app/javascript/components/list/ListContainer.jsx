@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Card from './Card';
+import Card from './ListCard';
 import { updateList } from '../../actions/ListActions';
 
 const mapStateToProps = (state, props) => {

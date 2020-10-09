@@ -54,6 +54,13 @@ const apiClient = {
       .then(callback)
       .catch(logError);
   },
+  fetchCard(id, callback) {
+    return axios
+      .get(`/api/cards/${id}`)
+      .then(unwrapData)
+      .then(callback)
+      .catch(logError);
+  },
 };
 
 export default apiClient;
