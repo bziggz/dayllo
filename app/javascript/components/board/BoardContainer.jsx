@@ -1,7 +1,7 @@
-import React from "react";
-import { connect } from "react-redux";
-import Board from "./Board";
-import { fetchBoard } from "../../actions/BoardActions";
+import React from 'react';
+import { connect } from 'react-redux';
+import Board from './Board';
+import { fetchBoard } from '../../actions/BoardActions';
 
 const mapStateToProps = (state, props) => {
   const id = props.match.params.id;
@@ -16,11 +16,7 @@ const mapDispatchToProps = (dispatch, props) => {
   const id = props.match.params.id;
   return {
     onFetchBoard: () => {
-      fetch(`/api/boards/${id}`).then((board) => {
-        board.json().then((brd) => {
-          dispatch(fetchBoard(brd));
-        });
-      });
+      dispatch(fetchBoard(id));
     },
   };
 };

@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react';
 
 class AddList extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      newListTitle: "",
+      newListTitle: '',
       selected: false,
     };
   }
@@ -25,7 +25,7 @@ class AddList extends React.Component {
     e.stopPropagation();
 
     this.setState({
-      newListTitle: "",
+      newListTitle: '',
       selected: false,
     });
   };
@@ -37,7 +37,7 @@ class AddList extends React.Component {
     this.props.onAddList(this.state.newListTitle);
 
     this.setState({
-      newListTitle: "",
+      newListTitle: '',
       selected: false,
     });
   };
@@ -46,7 +46,7 @@ class AddList extends React.Component {
     return (
       <div
         id="new-list"
-        className={this.state.selected ? "new-list selected" : "new-list"}
+        className={this.state.selected ? 'new-list selected' : 'new-list'}
         onClick={this.handleAddNewListClick}
       >
         <span>Add a list</span>

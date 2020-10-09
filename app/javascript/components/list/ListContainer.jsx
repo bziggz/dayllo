@@ -1,7 +1,7 @@
-import React from "react";
-import { connect } from "react-redux";
-import Card from "./Card";
-import { updateList } from "../../actions/ListActions";
+import React from 'react';
+import { connect } from 'react-redux';
+import Card from './Card';
+import { updateList } from '../../actions/ListActions';
 
 const mapStateToProps = (state, props) => {
   return {
@@ -12,17 +12,7 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     onListUpdate: (state) => {
-      const fetchObj = {
-        method: "PUT",
-        body: JSON.stringify(state),
-        headers: { "content-type": "application/json" },
-      };
-
-      fetch(`/api/lists/${ownProps.list.id}`, fetchObj).then((list) => {
-        list.json().then((l) => {
-          dispatch(updateList(l));
-        });
-      });
+      dispatch(updateList(ownProps.list.id, state));
     },
   };
 };

@@ -1,8 +1,8 @@
-import React from "react";
-import { connect } from "react-redux";
-import ListContainer from "./ListContainer";
-import AddList from "./AddList";
-import * as actions from "../../actions/ListActions";
+import React from 'react';
+import { connect } from 'react-redux';
+import ListContainer from './ListContainer';
+import AddList from './AddList';
+import { addList } from '../../actions/ListActions';
 
 const mapStateToProps = (state, props) => {
   const boardId = props.board.id;
@@ -15,21 +15,12 @@ const mapDispatchToProps = (dispatch, props) => {
   return {
     onAddList: (title) => {
       const boardId = props.board.id;
-
-      const fetchObj = {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({
+      dispatch(
+        addList({
           title,
           board_id: boardId,
-        }),
-      };
-
-      fetch("/api/lists", fetchObj).then((list) => {
-        list.json().then((l) => {
-          dispatch(actions.createList(l));
-        });
-      });
+        })
+      );
     },
   };
 };
