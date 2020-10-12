@@ -1,17 +1,24 @@
-import React from 'react';
+import React from "react";
+import { useHistory } from "react-router-dom";
 
 const Card = (props) => {
+  const history = useHistory();
+
+  const handleCloseClick = () => {
+    history.push(`/boards/${props.card.board_id}`);
+  };
+
   return (
     <div id="modal-container">
-      <div className="screen"></div>
+      <div className="screen" onClick={handleCloseClick} ></div>
       <div id="modal">
-        <i className="x-icon icon close-modal"></i>
+        <i className="x-icon icon close-modal" onClick={handleCloseClick}></i>
         <header>
           <i className="card-icon icon .close-modal"></i>
-          {/* <textarea className="list-title" style="height: 45px;">
+          <textarea className="list-title">
             Cards do many cool things. Click on this card to open it and learn
             more...
-          </textarea> */}
+          </textarea>
           <p>
             in list <a className="link">Stuff to try (this is a list)</a>
             <i className="sub-icon sm-icon"></i>
@@ -67,8 +74,8 @@ const Card = (props) => {
                   Cards have a symbol to indicate if they contain a description.
                 </p>
                 <p id="description-edit-options" className="hidden">
-                  You have unsaved edits on this field.{' '}
-                  <span className="link">View edits</span> -{' '}
+                  You have unsaved edits on this field.{" "}
+                  <span className="link">View edits</span> -{" "}
                   <span className="link">Discard</span>
                 </p>
               </form>
@@ -118,7 +125,7 @@ const Card = (props) => {
                     <span>The activities are not functional.</span>
                   </div>
                   <small>
-                    22 minutes ago - <span className="link">Edit</span> -{' '}
+                    22 minutes ago - <span className="link">Edit</span> -{" "}
                     <span className="link">Delete</span>
                   </small>
                   <div className="comment">
@@ -149,7 +156,7 @@ const Card = (props) => {
                   </div>
                   <p>
                     <span className="member-name">Victor Reyes</span> changed
-                    the background of this board{' '}
+                    the background of this board{" "}
                     <small>yesterday at 4:53 PM</small>
                   </p>
                 </li>
@@ -162,7 +169,7 @@ const Card = (props) => {
                     <span>Example of a comment.</span>
                   </div>
                   <small>
-                    22 minutes ago - <span className="link">Edit</span> -{' '}
+                    22 minutes ago - <span className="link">Edit</span> -{" "}
                     <span className="link">Delete</span>
                   </small>
                   <div className="comment">

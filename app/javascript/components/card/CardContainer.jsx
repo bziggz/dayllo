@@ -1,7 +1,7 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import Card from './Card';
-import { fetchCard } from '../../actions/CardActions';
+import React from "react";
+import { connect } from "react-redux";
+import Card from "./Card";
+import { fetchCard } from "../../actions/CardActions";
 
 const mapStateToProps = (state, props) => {
   const id = props.match.params.id;
@@ -27,7 +27,7 @@ class CardContainer extends React.Component {
   };
 
   render() {
-    return <Card card={this.props.card} />;
+    return this.props.card ? <Card card={this.props.card} /> : null;
   }
 }
 
