@@ -42,3 +42,24 @@ export function updateList(listId, list, callback) {
     });
   };
 }
+
+export function addCardRequest() {
+  return { type: types.ADD_CARD_REQUEST };
+}
+
+export function addCardSuccess(card) {
+  return { type: types.ADD_CARD_SUCCESS, payload: { card } };
+}
+
+export function addCard(card, callback) {
+  return function(dispatch) {
+    dispatch(addCardRequest());
+    apiClient.addCard(card, (newCard) => {
+      dispatch(addCardSuccess(newCard));
+
+      if (callback) {
+        callback(newCard);
+      }
+    });
+  };
+}

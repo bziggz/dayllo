@@ -14,7 +14,7 @@ const Card = ({ card }) => {
             <div className="card-label orange colorblindable"></div>
             <div className="card-label blue colorblindable"></div>
             <div className="card-label purple colorblindable"></div>
-            <p>{card.description}</p>
+            <p>{card.title}</p>
           </div>
           <div className="card-icons">
             <i className="clock-icon sm-icon overdue-recent completed">

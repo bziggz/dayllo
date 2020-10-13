@@ -26,6 +26,14 @@ const mapDispatchToProps = (dispatch, props) => {
 };
 
 class ListListingContainer extends React.Component {
+  state = {
+    activeDropListId: null,
+  }
+
+  onDropdown = (id) => {
+    this.setState({activeDropListId: id});
+  }
+
   render() {
     return (
       <div>
@@ -46,7 +54,7 @@ class ListListingContainer extends React.Component {
           <div id="list-container" className="list-container">
             <div id="existing-lists" className="existing-lists">
               {this.props.lists.map((list) => (
-                <ListContainer key={list.id} list={list} />
+                <ListContainer key={list.id} list={list} onDropdown={this.onDropdown} activeDropListId={this.state.activeDropListId}/>
               ))}
             </div>
             <AddList onAddList={this.props.onAddList} />

@@ -13,6 +13,8 @@ export default function cards(state = [], action) {
         action.payload.card,
         ...state.filter((card) => card.id !== action.payload.card.id),
       ];
+    case "ADD_CARD_SUCCESS":
+      return [...state, action.payload.card];
     default:
       return state;
   }

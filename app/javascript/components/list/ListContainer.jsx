@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Card from './ListCard';
-import { updateList } from '../../actions/ListActions';
+import { updateList, addCard } from '../../actions/ListActions';
+import AddCard from './AddCard';
 
 const mapStateToProps = (state, props) => {
   return {
@@ -14,6 +15,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     onListUpdate: (state) => {
       dispatch(updateList(ownProps.list.id, state));
     },
+    onAddCard: (state) => {
+      dispatch(addCard({list_id: ownProps.list.id, title: state}));
+    }
   };
 };
 
@@ -37,7 +41,7 @@ class ListContainer extends React.Component {
 
   render() {
     return (
-      <div className="list-wrapper">
+      <div className={this.props.activeDropListId === this.props.list.id ? "list-wrapper add-dropdown-active" : "list-wrapper"}>
         <div className="list-background">
           <div className="list">
             <a className="more-icon sm-icon" href=""></a>
@@ -65,9 +69,7 @@ class ListContainer extends React.Component {
                 </div>
               );
             })}
-            <div className="add-card-toggle" data-position="bottom">
-              Add a card...
-            </div>
+            <AddCard onAddCard={this.props.onAddCard} onDropdown={this.props.onDropdown} listId={this.props.list.id} />
           </div>
         </div>
       </div>
