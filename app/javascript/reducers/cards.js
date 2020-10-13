@@ -15,6 +15,11 @@ export default function cards(state = [], action) {
       ];
     case "ADD_CARD_SUCCESS":
       return [...state, action.payload.card];
+    case "UPDATE_CARD_SUCCESS":
+      return [
+        action.payload.card,
+        ...state.filter((card) => card.id !== action.payload.card.id),
+      ];
     default:
       return state;
   }

@@ -8,6 +8,18 @@ const Card = (props) => {
     history.push(`/boards/${props.card.board_id}`);
   };
 
+  const handleTitleChange = (e) => {
+    props.onTitleChange(e.target.value);
+  }
+
+  const handleDescriptionChange = (e) => {
+    props.onDescriptionChange(e.target.value);
+  }
+
+  const handleEditDescription = () => {
+    // TODO: props.onDescriptionClick
+  }
+
   return (
     <div id="modal-container">
       <div className="screen" onClick={handleCloseClick} ></div>
@@ -15,9 +27,7 @@ const Card = (props) => {
         <i className="x-icon icon close-modal" onClick={handleCloseClick}></i>
         <header>
           <i className="card-icon icon .close-modal"></i>
-          <textarea className="list-title">
-            Cards do many cool things. Click on this card to open it and learn
-            more...
+          <textarea className="list-title" onChange={handleTitleChange} value={props.title} onBlur={props.handleBlur}>
           </textarea>
           <p>
             in list <a className="link">Stuff to try (this is a list)</a>
@@ -67,12 +77,23 @@ const Card = (props) => {
               </ul>
               <form className="description">
                 <p>Description</p>
-                <span id="description-edit" className="link">
+                {props.editMode ?
+                <div>
+                  <textarea class="textarea-toggle" rows="1" autofocus>Cards have a symbol to indicate if they contain a description.</textarea>
+                  <div>
+                    <div class="button" value="Save" onClick={handleDescriptionChange}>Save</div>
+                    <i class="x-icon icon"></i>
+                  </div>
+                  </div>:
+                  <div>
+                  <span id="description-edit" className="link" onClick={handleEditDescription}>
                   Edit
                 </span>
-                <p className="textarea-overlay">
-                  Cards have a symbol to indicate if they contain a description.
+                  <p className="textarea-overlay">
+                  {props.description}
                 </p>
+                </div>
+                  }
                 <p id="description-edit-options" className="hidden">
                   You have unsaved edits on this field.{" "}
                   <span className="link">View edits</span> -{" "}
