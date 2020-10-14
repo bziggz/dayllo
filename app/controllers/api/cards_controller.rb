@@ -8,7 +8,7 @@ class Api::CardsController < ApplicationController
   end
 
   def create
-    @card = Card.new(card_params)
+    @card = Card.new(new_card_params)
 
     if @card.save
       render :create, status: :created
@@ -37,11 +37,11 @@ class Api::CardsController < ApplicationController
 
   private
 
-  def card_params
+  def new_card_params
     params.require(:card).permit(:title, :list_id)
   end
 
   def update_card_params
-    params.require(:card).permit(:title, :list_id)
+    params.require(:card).permit(:title, :list_id, :description)
   end
 end

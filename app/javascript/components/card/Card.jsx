@@ -1,5 +1,10 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
+import DueDate from "./DueDate";
+import CardTitle from "./CardTitle";
+import CardDescription from "./CardDescription";
+import CardLabels from "./CardLabels";
+import CardComments from "./CardComments";
 
 const Card = (props) => {
   const history = useHistory();
@@ -8,129 +13,31 @@ const Card = (props) => {
     history.push(`/boards/${props.card.board_id}`);
   };
 
-  const handleTitleChange = (e) => {
-    props.onTitleChange(e.target.value);
-  }
-
-  const handleDescriptionChange = (e) => {
-    props.onDescriptionChange(e.target.value);
-  }
-
-  const handleEditDescription = () => {
-    // TODO: props.onDescriptionClick
-  }
-
   return (
     <div id="modal-container">
-      <div className="screen" onClick={handleCloseClick} ></div>
+      <div className="screen" onClick={handleCloseClick}></div>
       <div id="modal">
         <i className="x-icon icon close-modal" onClick={handleCloseClick}></i>
-        <header>
-          <i className="card-icon icon .close-modal"></i>
-          <textarea className="list-title" onChange={handleTitleChange} value={props.title} onBlur={props.handleBlur}>
-          </textarea>
-          <p>
-            in list <a className="link">Stuff to try (this is a list)</a>
-            <i className="sub-icon sm-icon"></i>
-          </p>
-        </header>
+        <CardTitle card={props.card} onCardUpdate={props.onCardUpdate} />
         <section className="modal-main">
           <ul className="modal-outer-list">
             <li className="details-section">
               <ul className="modal-details-list">
-                <li className="labels-section">
-                  <h3>Labels</h3>
-                  <div className="member-container">
-                    <div className="green label colorblindable"></div>
-                  </div>
-                  <div className="member-container">
-                    <div className="yellow label colorblindable"></div>
-                  </div>
-                  <div className="member-container">
-                    <div className="orange label colorblindable"></div>
-                  </div>
-                  <div className="member-container">
-                    <div className="blue label colorblindable"></div>
-                  </div>
-                  <div className="member-container">
-                    <div className="purple label colorblindable"></div>
-                  </div>
-                  <div className="member-container">
-                    <div className="red label colorblindable"></div>
-                  </div>
-                  <div className="member-container">
-                    <i className="plus-icon sm-icon"></i>
-                  </div>
-                </li>
-                <li className="due-date-section">
-                  <h3>Due Date</h3>
-                  <div id="dueDateDisplay" className="overdue completed">
-                    <input
-                      id="dueDateCheckbox"
-                      type="checkbox"
-                      className="checkbox"
-                      checked=""
-                    />
-                    Aug 4 at 10:42 AM <span>(past due)</span>
-                  </div>
-                </li>
+                <CardLabels
+                  card={props.card}
+                  onCardUpdate={props.onCardUpdate}
+                />
+                <DueDate card={props.card} onCardUpdate={props.onCardUpdate} />
               </ul>
-              <form className="description">
-                <p>Description</p>
-                {props.editMode ?
-                <div>
-                  <textarea class="textarea-toggle" rows="1" autofocus>Cards have a symbol to indicate if they contain a description.</textarea>
-                  <div>
-                    <div class="button" value="Save" onClick={handleDescriptionChange}>Save</div>
-                    <i class="x-icon icon"></i>
-                  </div>
-                  </div>:
-                  <div>
-                  <span id="description-edit" className="link" onClick={handleEditDescription}>
-                  Edit
-                </span>
-                  <p className="textarea-overlay">
-                  {props.description}
-                </p>
-                </div>
-                  }
-                <p id="description-edit-options" className="hidden">
-                  You have unsaved edits on this field.{" "}
-                  <span className="link">View edits</span> -{" "}
-                  <span className="link">Discard</span>
-                </p>
-              </form>
+              <CardDescription
+                card={props.card}
+                onCardUpdate={props.onCardUpdate}
+              />
             </li>
-            <li className="comment-section">
-              <h2 className="comment-icon icon">Add Comment</h2>
-              <div>
-                <div className="member-container">
-                  <div className="card-member">TP</div>
-                </div>
-                <div className="comment">
-                  <label>
-                    <textarea
-                      required=""
-                      rows="1"
-                      placeholder="Write a comment..."
-                    ></textarea>
-                    <div>
-                      <a className="light-button card-icon sm-icon"></a>
-                      <a className="light-button smiley-icon sm-icon"></a>
-                      <a className="light-button email-icon sm-icon"></a>
-                      <a className="light-button attachment-icon sm-icon"></a>
-                    </div>
-                    <div>
-                      <input
-                        type="submit"
-                        className="button not-implemented"
-                        value="Save"
-                      />
-                    </div>
-                  </label>
-                </div>
-              </div>
-            </li>
+            <CardComments
+              card={props.card}
+              onCardUpdate={props.onCardUpdate}
+            />
             <li className="activity-section">
               <h2 className="activity-icon icon">Activity</h2>
               <ul className="horiz-list">

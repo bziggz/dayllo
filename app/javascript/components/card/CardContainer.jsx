@@ -26,40 +26,23 @@ const mapDispatchToProps = (dispatch, props) => {
 };
 
 class CardContainer extends React.Component {
-  state = {
-    title: '',
-    description: '',
-    editMode: false,
-  }
-
   componentDidMount = () => {
     this.props.onFetchCard();
   };
 
   componentDidUpdate = (prevProps) => {
     if (prevProps.card !== this.props.card) {
-      this.setState({title: this.props.card.title, description: this.props.card.description});
+      this.setState({
+        title: this.props.card.title,
+        description: this.props.card.description,
+      });
     }
-  }
-
-  onDescriptionChange = (description) => {
-    this.setState({description});
-  }
-
-  onTitleChange = (title) => {
-    this.setState({title});
-  }
-
-  handleBlur = () => {
-    this.props.onCardUpdate({title: this.state.title});
   };
 
-  onEditDescriptionClick = () => {
-    this.setState({editMode: true});
-  }
-
   render() {
-    return this.props.card ? <Card card={this.props.card} onTitleChange={this.onTitleChange} title={this.state.title} handleBlur={this.handleBlur} description={this.state.description} onDescriptionChange={this.onDescriptionChange} onEditDescriptionClick={this.onEditDescriptionClick} editMode={this.state.editMode}/> : null;
+    return this.props.card ? (
+      <Card card={this.props.card} onCardUpdate={this.props.onCardUpdate} />
+    ) : null;
   }
 }
 
