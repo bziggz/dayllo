@@ -23,10 +23,13 @@ class CardTitle extends React.Component {
           value={this.state.title}
           onBlur={this.handleBlur}
         ></textarea>
-        <p>
-          in list <a className="link">Stuff to try (this is a list)</a>
-          <i className="sub-icon sm-icon"></i>
-        </p>
+        {/* <p> */}
+        {/*   in list */}
+        {/*   <a className="link" onClick={this.props.handleCloseClick}> */}
+        {/*     {this.props.list.title} */}
+        {/*   </a> */}
+        {/*   <i className="sub-icon sm-icon"></i> */}
+        {/* </p> */}
       </header>
     );
   }

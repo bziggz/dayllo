@@ -35,7 +35,7 @@ class ListContainer extends React.Component {
     this.setState({ title: event.target.value });
   };
 
-  handleBlur = (e) => {
+  handleBlur = () => {
     this.props.onListUpdate(this.state);
   };
 

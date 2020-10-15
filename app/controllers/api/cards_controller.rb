@@ -42,6 +42,6 @@ class Api::CardsController < ApplicationController
   end
 
   def update_card_params
-    params.require(:card).permit(:title, :list_id, :description)
+    params.require(:card).permit(:id, :title, :list_id, :description, :due_date, :labels => [])
   end
 end

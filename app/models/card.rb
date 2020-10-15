@@ -3,7 +3,6 @@ class Card < ApplicationRecord
   has_many :comments
 
   validates_presence_of :title, allow_blank: false
-
   # board_id instance method
   def board_id
     list.board_id
