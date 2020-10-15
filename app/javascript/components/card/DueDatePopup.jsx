@@ -66,8 +66,12 @@ class DueDatePopup extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(moment(this.props.dueDate).toDate());
-    this.props.onCardUpdate({ due_date: new Date(this.picker.toString()) })
+    this.props.onCardUpdate({ due_date: new Date(this.picker.toString()) });
+    this.props.toggleDueDatePopup();
+  };
+
+  handleRemove = () => {
+    this.props.onCardUpdate({ due_date: "" });
     this.props.toggleDueDatePopup();
   };
 
@@ -111,7 +115,11 @@ class DueDatePopup extends React.Component {
             <button className="button" type="submit">
               Save
             </button>
-            <button className="button red-button" type="reset">
+            <button
+              className="button red-button"
+              type="reset"
+              onClick={this.handleRemove}
+            >
               Remove
             </button>
           </form>

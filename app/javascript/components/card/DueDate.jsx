@@ -29,13 +29,13 @@ const DueDate = (props) => {
               : "completed"
           }
         >
-          <input
-            id="dueDateCheckbox"
-            type="checkbox"
-            className="checkbox"
-          />
+          <input id="dueDateCheckbox" type="checkbox" className="checkbox" />
           <span onClick={onDateClick}>
-            <span> {moment(props.dueDate).format("MMMM Do YYYY")} </span>
+            {!props.dueDate ? (
+              <span> No Due Date</span>
+            ) : (
+              <span> {moment(props.dueDate).format("MMMM Do YYYY")} </span>
+            )}
             {moment(props.dueDate).isBefore(moment.now()) && (
               <span> (past due)</span>
             )}
