@@ -1,6 +1,29 @@
 import React from "react";
+import { connect } from "react-redux";
+import { createComment } from "../../actions/CardActions";
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onCommentCreate: (comment) => {
+      dispatch(createComment(comment));
+    }
+  }
+}
 
 class CardComments extends React.Component {
+  state = {
+    text: "",
+  }
+
+  handleChange = (e) => {
+    this.setState({ text: e.target.value });
+  }
+
+  handleAddClick = () => {
+    this.props.onCommentCreate({ card_id: this.props.card.id, text: this.state.text });
+    this.setState({ text: "" });
+  }
+
   render() {
     return (
       <li className="comment-section">
@@ -15,6 +38,8 @@ class CardComments extends React.Component {
                 required=""
                 rows="1"
                 placeholder="Write a comment..."
+                onChange={this.handleChange}
+                value={this.state.text}
               ></textarea>
               <div>
                 <a className="light-button card-icon sm-icon"></a>
@@ -25,8 +50,9 @@ class CardComments extends React.Component {
               <div>
                 <input
                   type="submit"
-                  className="button not-implemented"
+                  className="button"
                   value="Save"
+                  onClick={this.handleAddClick}
                 />
               </div>
             </label>
@@ -37,4 +63,4 @@ class CardComments extends React.Component {
   }
 }
 
-export default CardComments;
+export default connect(null, mapDispatchToProps)(CardComments);

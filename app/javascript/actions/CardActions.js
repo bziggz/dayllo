@@ -34,10 +34,31 @@ export function updateCard(card, callback) {
   return function(dispatch) {
     dispatch(updateCardRequest());
     apiClient.updateCard(card, (updatedCard) => {
-      dispatch(fetchCardSuccess(updatedCard));
+      dispatch(updateCardSuccess(updatedCard));
 
       if (callback) {
         callback(updatedCard);
+      }
+    });
+  };
+}
+
+export function createCommentRequest() {
+  return { type: types.CREATE_COMMENT_REQUEST };
+}
+
+export function createCommentSuccess(comment) {
+  return { type: types.CREATE_COMMENT_SUCCESS, payload: { comment } };
+}
+
+export function createComment(comment, callback) {
+  return function(dispatch) {
+    dispatch(createCommentRequest());
+    apiClient.createComment(comment, (createdComment) => {
+      dispatch(createCommentSuccess(createdComment));
+
+      if (callback) {
+        callback(createdComment);
       }
     });
   };

@@ -48,7 +48,7 @@ const Card = (props) => {
               />
             </li>
             <CardComments card={props.card} onCardUpdate={props.onCardUpdate} />
-            <Activity />
+            <Activity activity={props.card.activity}/>
           </ul>
         </section>
         <Buttons
